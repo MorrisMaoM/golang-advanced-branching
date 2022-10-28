@@ -1,5 +1,13 @@
 package main
 
+import (
+	"encoding/json"
+	"io/ioutil"
+	"log"
+	"os"
+	"strings"
+)
+
 // Values array for the feedback.json file
 type Values struct {
 	Models []Model `json:"value"`
@@ -77,7 +85,6 @@ func main() {
 	// Print ratings for the different vehicles
 }
 
-/*
 func readJSONFile() Values {
 	jsonFile, err := os.Open("feedback.json")
 
@@ -93,4 +100,19 @@ func readJSONFile() Values {
 
 	return content
 }
-*/
+
+func generateRating() {
+	f := readJSONFile()
+	for _, v := range f.Models {
+		var vehResult feedbackResult
+		var vehRating rating
+		for _, msg := range v.Feedback {
+
+			if text := strings.Split(msg, ""); len(text) >= 5 {
+				vehRating = 5.0
+				vehResult.feedbackTotal++
+
+			}
+		}
+	}
+}
