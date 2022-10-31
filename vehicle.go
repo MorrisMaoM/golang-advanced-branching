@@ -81,7 +81,7 @@ func init() {
 func main() {
 
 	// Generate ratings for the different vehicles
-
+	generateRating()
 	// Print ratings for the different vehicles
 }
 
@@ -124,7 +124,17 @@ func generateRating() {
 						vehRating += extraNegative
 					}
 				}
+				switch {
+				case vehRating > 8.0:
+					vehResult.feedbackPositive++
+				case vehRating >= 4.0 && vehRating <= 8.0:
+					vehResult.feedbackNeutral++
+				case vehRating < 4.0:
+					vehResult.feedbackNegative++
+				}
 			}
 		}
+		vehResult = vehicleResult[v.Name]
 	}
+
 }
