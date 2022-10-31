@@ -111,7 +111,19 @@ func generateRating() {
 			if text := strings.Split(msg, ""); len(text) >= 5 {
 				vehRating = 5.0
 				vehResult.feedbackTotal++
-
+				for _, word := range text {
+					s := strings.Trim(strings.ToLower(word), " ,.,!,?,\t,\n,\r")
+					switch s {
+					case "pleasure", "impressed", "wonderful", "fantastic", "splendid":
+						vehRating += extraPositive
+					case "help", "helpful", "thanks", "thank you", "happy":
+						vehRating += positive
+					case "not helpful", "sad", "angry", "improve", "annoy":
+						vehRating += negative
+					case "pathetic", "bad", "worse", "unfortunately", "agitated", "frustrated":
+						vehRating += extraNegative
+					}
+				}
 			}
 		}
 	}
