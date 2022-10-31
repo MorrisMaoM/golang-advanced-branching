@@ -84,6 +84,19 @@ func main() {
 	// Generate ratings for the different vehicles
 	generateRating()
 	// Print ratings for the different vehicles
+	for _, veh := range inventory {
+		switch v := veh.(type) {
+		case car:
+			v.carDetails()
+		case bike:
+			v.bikeDetails()
+		case truck:
+			v.truckDetails()
+		default:
+			fmt.Printf("Are you sure this Vehicle Type exists")
+		}
+
+	}
 }
 
 func readJSONFile() Values {
@@ -155,4 +168,14 @@ func showRating(model string) {
 func (c *car) carDetails() {
 	fmt.Printf("\n%-5v: %-8v: %-12v ", "Car", c.make, c.model)
 	showRating(c.model)
+}
+
+func (b *bike) bikeDetails() {
+	fmt.Printf("\n%-5v: %-8v: %-12v ", "Bike", b.make, b.model)
+	showRating(b.model)
+}
+
+func (t *truck) truckDetails() {
+	fmt.Printf("\n%-5v: %-8v: %-12v ", "Truck", t.make, t.model)
+	showRating(t.model)
 }
